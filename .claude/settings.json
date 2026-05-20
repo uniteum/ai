@@ -41,7 +41,11 @@
         "deny": [
             "Bash(forge script *)",
             "Bash(forge create *)",
-            "Bash(forge verify-contract *)"
+            "Bash(forge verify-contract *)",
+            "Bash(git add)",
+            "Bash(git add *)",
+            "Bash(git -C * add)",
+            "Bash(git -C * add *)"
         ]
     }
 }
