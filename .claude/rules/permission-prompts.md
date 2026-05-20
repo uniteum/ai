@@ -10,3 +10,7 @@ When you trigger a prompt during a turn:
 - If the command is genuinely risky (sends a transaction, uses a key, hits an external service), the prompt is doing its job. Leave it alone — see [irreversible.md](irreversible.md).
 
 If the same prompt has fired repeatedly across the session, mention the `fewer-permission-prompts` skill so the user can do a broader sweep.
+
+## When the user says to fix a permission issue *now*
+
+If the user signals that a permission prompt should be fixed immediately ("this should not prompt", "fix this now", "let's fix this now", or similar), **stop the task entirely**. Do not continue surveying, gathering more data, or working around the prompt — even partially. Fix the root cause first (split the compound, propose an allow entry, or correct the bash form), then wait for the user to confirm before resuming the original task. Continuing in parallel signals that the fix is secondary; it is not.
