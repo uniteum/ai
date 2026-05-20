@@ -46,6 +46,10 @@
       "Bash(git add *)",
       "Bash(git -C * add)",
       "Bash(git -C * add *)"
+    ],
+    "additionalDirectories": [
+      "~/git/",
+      "~/.claude/"
     ]
   },
   "extraKnownMarketplaces": {
