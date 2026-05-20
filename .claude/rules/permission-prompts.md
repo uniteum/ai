@@ -11,11 +11,13 @@ When you trigger a prompt during a turn:
 
 If the same prompt has fired repeatedly across the session, mention the `fewer-permission-prompts` skill so the user can do a broader sweep.
 
-## Writing allow entries
+## Writing allow / deny entries
 
 Use the colon-wildcard form `Bash(cmd:*)` — it matches both bare `cmd` and `cmd <args>`. The space form `Bash(cmd *)` matches only the latter, so bare `cmd` keeps prompting.
 
-For commands with a leading flag like `git -C <dir>`, allow both shapes: `Bash(cmd:*)` and `Bash(git -C * cmd:*)`.
+**The inner-`*` form does not work.** Patterns like `Bash(git -C * log:*)` — wildcard between literal segments — do not match anything, even a trivial `git -C . log` (verified empirically). For commands that may include a leading flag like `-C <dir>`, allowlist at the broader bare-verb level: `Bash(git:*)` matches `git`, `git log`, and `git -C /any/path log` alike.
+
+A broad allow with a precise deny is the working pattern: `Bash(git:*)` in `allow` plus `Bash(git add:*)` in `deny` blocks the cwd form of `git add`. The same inner-`*` limitation applies on the deny side, so `Bash(git add:*)` does not block `git -C <dir> add`. Close that gap in rules (see [staging.md](staging.md)), not by retrying the broken pattern.
 
 Use the space form only when bare `cmd` should keep prompting — rare; usually means the verb shouldn't be allowlisted at all.
 
