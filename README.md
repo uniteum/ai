@@ -12,6 +12,7 @@ Downstream repos pull this in as a git submodule or subtree under their own
 - [.claude/settings.json](.claude/settings.json) — shared permissions and hook wiring
 - [.claude/rules/](.claude/rules/) — markdown rules (commit style, bash usage, staging, etc.)
 - [.claude/skills/](.claude/skills/) — reusable skill bundles (one directory per skill, each with a `SKILL.md`)
+- [.claude/commands/](.claude/commands/) — reusable slash commands (one `<name>.md` per command, invoked as `/<name>`)
 - [link-memory.sh](link-memory.sh) — symlink Claude Code's per-project memory dir into the repo so memory can live alongside the code
 - [memory/](memory/) — destination for the memory symlink (populated by `link-memory.sh`)
 

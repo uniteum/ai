@@ -11,6 +11,14 @@ When you trigger a prompt during a turn:
 
 If the same prompt has fired repeatedly across the session, mention the `fewer-permission-prompts` skill so the user can do a broader sweep.
 
+## Writing allow entries
+
+Use the colon-wildcard form `Bash(cmd:*)` — it matches both bare `cmd` and `cmd <args>`. The space form `Bash(cmd *)` matches only the latter, so bare `cmd` keeps prompting.
+
+For commands with a leading flag like `git -C <dir>`, allow both shapes: `Bash(cmd:*)` and `Bash(git -C * cmd:*)`.
+
+Use the space form only when bare `cmd` should keep prompting — rare; usually means the verb shouldn't be allowlisted at all.
+
 ## When the user says to fix a permission issue *now*
 
 If the user signals that a permission prompt should be fixed immediately ("this should not prompt", "fix this now", "let's fix this now", or similar), **stop the task entirely**. Do not continue surveying, gathering more data, or working around the prompt — even partially. Fix the root cause first (split the compound, propose an allow entry, or correct the bash form), then wait for the user to confirm before resuming the original task. Continuing in parallel signals that the fix is secondary; it is not.
