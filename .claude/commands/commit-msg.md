@@ -14,4 +14,4 @@ Generate a git commit message for the current staged/unstaged changes.
    - Includes a brief body only when the *why* isn't obvious from the diff.
 5. Present the message in a code block for the user to copy.
 
-Do not run `git commit` yourself, and do not stage files. See [commit-messages.md](../rules/commit-messages.md) and [staging.md](../rules/staging.md) for the broader policy.
+Do not run `git commit` yourself, and do not stage files. See [commit-messages.md](../rules/git/commit-messages.md) and [staging.md](../rules/git/staging.md) for the broader policy.

@@ -6,7 +6,7 @@ When you trigger a prompt during a turn:
 
 - If the command *should* be routine in this repo, surface a specific proposed `allow:` entry for [settings.json](../../settings.json) at end of turn. Be precise — match the command shape that actually fired, not a broader wildcard. Don't edit [settings.json](../../settings.json) yourself; let the user review.
 - If the prompt fired because of a compound statement (`;`, `&&`, `|`), the fix is to split into separate Bash calls — see [bash.md](bash.md). Don't broaden the allowlist to paper over compounds.
-- If the command is on the `deny:` list (e.g. `git add`), the denial is deliberate. Don't try to bypass — see [staging.md](staging.md).
+- If the command is on the `deny:` list (e.g. `git add`), the denial is deliberate. Don't try to bypass — see [staging.md](../git/staging.md).
 - If the command is genuinely risky (sends a transaction, uses a key, hits an external service), the prompt is doing its job. Leave it alone — see [irreversible.md](irreversible.md).
 
 If the same prompt has fired repeatedly across the session, mention the `fewer-permission-prompts` skill so the user can do a broader sweep.
@@ -17,7 +17,7 @@ Use the colon-wildcard form `Bash(cmd:*)` — it matches both bare `cmd` and `cm
 
 **The inner-`*` form does not work.** Patterns like `Bash(git -C * log:*)` — wildcard between literal segments — do not match anything, even a trivial `git -C . log` (verified empirically). For commands that may include a leading flag like `-C <dir>`, allowlist at the broader bare-verb level: `Bash(git:*)` matches `git`, `git log`, and `git -C /any/path log` alike.
 
-A broad allow with a precise deny is the working pattern: `Bash(git:*)` in `allow` plus `Bash(git add:*)` in `deny` blocks the cwd form of `git add`. The same inner-`*` limitation applies on the deny side, so `Bash(git add:*)` does not block `git -C <dir> add`. Close that gap in rules (see [staging.md](staging.md)), not by retrying the broken pattern.
+A broad allow with a precise deny is the working pattern: `Bash(git:*)` in `allow` plus `Bash(git add:*)` in `deny` blocks the cwd form of `git add`. The same inner-`*` limitation applies on the deny side, so `Bash(git add:*)` does not block `git -C <dir> add`. Close that gap in rules (see [staging.md](../git/staging.md)), not by retrying the broken pattern.
 
 Use the space form only when bare `cmd` should keep prompting — rare; usually means the verb shouldn't be allowlisted at all.
 

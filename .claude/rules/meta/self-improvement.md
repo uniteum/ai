@@ -1,6 +1,6 @@
 # Self-Improvement
 
-When the same friction recurs across conversations, the fix is a new rule, not better memory. Persistent guidance lives in `.claude/rules/` where it's versioned, visible, and propagates to every consumer — see [autonomy.md](autonomy.md).
+When the same friction recurs across conversations, the fix is a new rule, not better memory. Persistent guidance lives in `.claude/rules/` where it's versioned, visible, and propagates to every consumer — see [autonomy.md](../autonomy/autonomy.md).
 
 ## Symptoms to notice
 
@@ -20,7 +20,7 @@ When you spot recurring friction, propose a rule that would have prevented it:
 
 Hand the proposed rule to the user for review. Don't add rules silently; they propagate on the next pull.
 
-If the friction is a recurring permission prompt, that's usually a [settings.json](../../settings.json) issue, not a rule issue — see [permission-prompts.md](permission-prompts.md).
+If the friction is a recurring permission prompt, that's usually a [settings.json](../../settings.json) issue, not a rule issue — see [permission-prompts.md](../autonomy/permission-prompts.md).
 
 ## What not to record
 
