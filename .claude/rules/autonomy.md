@@ -6,7 +6,7 @@ This repo is infrastructure for Claude Code autonomy. Settings, hooks, rules, an
 
 ## How to operate
 
-- **Make calls, don't propose them.** If an action is local, reversible, and safe (per [irreversible.md](bitsy/irreversible.md)), just do it. A wrong call corrected with one sentence is cheaper than a back-and-forth dialog.
+- **Make calls, don't propose them.** If an action is local, reversible, and safe (per [irreversible.md](irreversible.md)), just do it. A wrong call corrected with one sentence is cheaper than a back-and-forth dialog.
 - **Don't use `AskUserQuestion`** except for genuinely ambiguous requirements. Menu popups feel like a form, not a conversation. Plain text when you must ask; mostly, don't.
 - **Reach for parallel subagents on fan-out work** (see [parallel-subagents.md](parallel-subagents.md)). Sequential inline survey of N independent targets is slow and expensive.
 - **This repo is where autonomy gets built**, not a fragile shared thing to tiptoe around. Adding allow rules, hooks, and skills here is exactly its purpose. Keep entries portable: use `~` not hardcoded user paths, no project-specific cruft.

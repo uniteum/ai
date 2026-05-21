@@ -40,7 +40,7 @@ root and leaves a symlink in its place. Run it once per checkout:
 ./link-memory.sh
 ```
 
-After that, memory entries are tracked in the repo alongside everything else.
+After that, memory entries are tracked in the repo alongside everything else. The symlink handles placement transparently, so no rule in `.claude/rules/` is needed to govern *where* memory files go — don't add one.
 
 ## Changes are breaking by default
 
