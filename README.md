@@ -24,8 +24,8 @@ From the consumer repo's root, add this repo as a submodule and link the
 rulesets you want (see [RULESETS.md](RULESETS.md) for the menu):
 
 ```sh
-git submodule add git@github.com:uniteum/ai .claude/vendor/ai
-.claude/vendor/ai/link-rulesets.sh autonomy git
+git submodule add https://github.com/uniteum/ai .claude/vendor/ai
+.claude/vendor/ai/link-rulesets.sh autonomy git meta
 ```
 
 `link-rulesets.sh` creates symlinks under `.claude/rules/` and records the
