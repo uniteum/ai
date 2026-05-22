@@ -3,32 +3,46 @@
 Reusable [Claude Code](https://claude.ai/code) configuration — settings, rules,
 skills, and slash commands — shared across Uniteum projects.
 
-Downstream repos pull this in as a git submodule or subtree under their own
-`.claude/` directory, so the paths here mirror the layout Claude Code expects.
+Downstream repos add this as a git submodule, then symlink the rulesets they
+want into their own `.claude/rules/`.
 
 ## Layout
 
 - [CLAUDE.md](CLAUDE.md) — authoring guidelines for this repo
+- [RULESETS.md](RULESETS.md) — catalog of available rulesets
 - [.claude/settings.json](.claude/settings.json) — shared permissions and hook wiring
-- [.claude/rules/](.claude/rules/) — markdown rules (commit style, bash usage, staging, etc.)
+- [.claude/rules/](.claude/rules/) — markdown rules, grouped into rulesets
 - [.claude/skills/](.claude/skills/) — reusable skill bundles (one directory per skill, each with a `SKILL.md`)
 - [.claude/commands/](.claude/commands/) — reusable slash commands (one `<name>.md` per command, invoked as `/<name>`)
+- [link-rulesets.sh](link-rulesets.sh) — symlink selected rulesets into a consumer's `.claude/rules/`
 - [link-memory.sh](link-memory.sh) — symlink Claude Code's per-project memory dir into the repo so memory can live alongside the code
 - [memory/](memory/) — destination for the memory symlink (populated by `link-memory.sh`)
 
 ## Consuming this repo
 
-Pick one and run from the consumer repo's root:
+From the consumer repo's root, add this repo as a submodule and link the
+rulesets you want (see [RULESETS.md](RULESETS.md) for the menu):
 
 ```sh
-# as a submodule
-git submodule add <url> .claude
-
-# or as a subtree
-git subtree add --prefix=.claude <url> main --squash
+git submodule add <url> .claude/vendor/ai
+.claude/vendor/ai/link-rulesets.sh autonomy git
 ```
 
-Either way, the contents land at `.claude/` with no path remapping.
+`link-rulesets.sh` creates symlinks under `.claude/rules/` and records the
+selection in `.claude/rules/.rulesets`. Commit the submodule, the symlinks, and
+the sentinel. Re-run the script with a different list to change the selection;
+it adds and removes only the symlinks it manages.
+
+Fresh clones of the consumer repo need the submodule populated:
+
+```sh
+git clone --recurse-submodules <consumer-url>
+# or, in an existing clone:
+git submodule update --init
+```
+
+This mechanism covers `.claude/rules/` only — consuming `settings.json`, skills,
+or commands isn't automated yet.
 
 ## Memory
 
